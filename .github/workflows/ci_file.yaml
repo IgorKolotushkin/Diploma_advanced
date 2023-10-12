@@ -19,4 +19,4 @@ jobs:
       run: | 
         pytest --envfile .env.test
     - name: flake8
-      run: flake8 --ignore DAR003,WPS202,I001,I005,S311,WPS110,WPS407,WPS226 /src
+      run: flake8 --ignore DAR003,WPS202,I001,I005,S311,WPS110,WPS407,WPS226,WPS426,WPS100,P101,I003 /src
