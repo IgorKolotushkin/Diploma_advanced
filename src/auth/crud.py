@@ -12,6 +12,7 @@ from src.auth.schemas import UserRegisterSchema
 from src.auth.utils_user import hash_password
 
 
+
 async def get_user_by_email(email: str, session: AsyncSession) -> User:
     """
     Функция для получения пользователя из базы данных по email.
