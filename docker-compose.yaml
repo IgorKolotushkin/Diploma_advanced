@@ -1,0 +1,125 @@
+version: '3.9'
+services:
+  app:
+    build:
+      context: src
+    container_name: fastapi.app
+    restart: unless-stopped
+    stop_signal: SIGKILL
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    volumes:
+      - 'media:/src/media'
+    networks:
+      - backend
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+        tag: "{{.ImageName}}|{{.Name}}"
+
+  nginx:
+      build:
+        context: nginx
+      container_name: nginx
+      restart: unless-stopped
+      ports:
+        - "81:80"
+      volumes:
+        - 'media:/usr/share/nginx/html/media'
+      depends_on:
+        - app
+      networks:
+        - backend
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "50m"
+          max-file: "5"
+          tag: "{{.ImageName}}|{{.Name}}"
+
+  postgres:
+    build:
+      context: postgres
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=clone_tweet
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_storage:/var/lib/postgresql/data
+    networks:
+      - backend
+
+#  prometheus:
+#    image: prom/prometheus:latest
+#    restart: always
+#    volumes:
+#      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+#    ports:
+#      - '9090:9090'
+#    depends_on:
+#      - app
+#    networks:
+#      - backend
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    depends_on:
+      - loki
+    networks:
+      - backend
+    volumes:
+      - 'grafana_storage:/var/lib/grafana'
+
+  promtail:
+    image: grafana/promtail
+    container_name: promtail
+    restart: unless-stopped
+    expose:
+      - 9080
+    ports:
+      - "9080:9080"
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - promtail_data:/var/lib/promtail/positions
+      - ${PWD}/promtail/promtail.yml:/etc/promtail/promtail.yml
+    command:
+      - '-config.file=/etc/promtail/promtail.yml'
+    networks:
+      - backend
+
+  loki:
+    image: grafana/loki
+    container_name: loki
+    restart: unless-stopped
+    ports:
+      - "3100:3100"
+    volumes:
+      - ${PWD}/loki/loki-config.yml:/etc/loki-config.yml
+      - loki_data:/tmp/loki/
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  media:
+    driver: local
+  app_storage: {}
+  grafana_storage: {}
+  postgres_storage: {}
+  promtail_data: {}
+  loki_data: {}
