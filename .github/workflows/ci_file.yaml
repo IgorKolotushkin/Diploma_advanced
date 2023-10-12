@@ -17,7 +17,6 @@ jobs:
       run: pip install -r requirements-dev.txt
     - name: testing
       run: | 
-        cd src
-        pytest
+        pytest --envfile .env.test
     - name: flake8
       run: flake8 --ignore DAR003,WPS202,I001,I005,S311,WPS110,WPS407,WPS226 /src
