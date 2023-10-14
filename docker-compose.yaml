@@ -112,7 +112,6 @@ networks:
 volumes:
   media:
     driver: local
-  app_storage: {}
   grafana_storage: {}
   postgres_storage: {}
   promtail_data: {}
