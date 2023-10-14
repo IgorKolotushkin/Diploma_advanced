@@ -116,3 +116,4 @@ volumes:
   postgres_storage: {}
   promtail_data: {}
   loki_data: {}
+
