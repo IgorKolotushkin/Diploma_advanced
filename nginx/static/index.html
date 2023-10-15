@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" href="/favicon.ico">
+    <title>twitter-clone</title>
+    <link href="/css/chunk-0420bcc4.d6bc3184.css" rel="prefetch">
+    <link href="/css/chunk-10e0d5b4.130d80ef.css" rel="prefetch">
+    <link href="/css/chunk-6f77c742.8d9a3d9c.css" rel="prefetch">
+    <link href="/css/chunk-732a3e8c.6334cd6b.css" rel="prefetch">
+    <link href="/js/chunk-0420bcc4.54847589.js" rel="prefetch">
+    <link href="/js/chunk-10e0d5b4.87e81b18.js" rel="prefetch">
+    <link href="/js/chunk-6f77c742.ae7a5529.js" rel="prefetch">
+    <link href="/js/chunk-732a3e8c.917313f6.js" rel="prefetch">
+    <link href="/js/chunk-76301fe8.cc56c3b1.js" rel="prefetch">
+    <link href="/css/app.45d81840.css" rel="preload" as="style">
+    <link href="/css/chunk-vendors.de691de6.css" rel="preload" as="style">
+    <link href="/js/app.29a8040c.js" rel="preload" as="script">
+    <link href="/js/chunk-vendors.398321e0.js" rel="preload" as="script">
+    <link href="/css/chunk-vendors.de691de6.css" rel="stylesheet">
+    <link href="/css/app.45d81840.css" rel="stylesheet">
+</head>
+<body>
+<noscript><strong>We're sorry but twitter-clone doesn't work properly without JavaScript enabled. Please enable it to
+    continue.</strong></noscript>
+<div id="app"></div>
+<script src="/js/chunk-vendors.398321e0.js"></script>
+<script src="/js/app.29a8040c.js"></script>
+<link href="/css/user.css" rel="stylesheet" type="text/css">
+<div id="id01" class="modal">
+    <form class="modal-content" method="dialog">
+        <div class="container">
+            <h1>Вход в профиль</h1>
+            <p>Заполните эту форму для входа</p>
+            <hr>
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder=" Ведите Email" name="email" id="email" required>
+
+            <label for="psw"><b>Пароль</b></label>
+            <input type="password" placeholder=" Ведите пароль" name="psw" id="psw" required>
+
+            <div class="clearfix">
+                <button onclick="funcApikey();" type="submit" class="signupbtn">Войти</button>
+                <button onclick="document.getElementById('id02').style.display = 'block';" type="submit"
+                        class="signinbtn">Регистрация
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="id02" class="modal">
+    <form class="modal-content" method="dialog">
+        <div class="container">
+            <h1>Регистрация</h1>
+            <p>Заполните эту форму для регистрации</p>
+            <hr>
+            <label for="email_reg"><b>Email</b></label>
+            <input type="text" placeholder=" Ведите Email" name="email" id="email_reg" required>
+
+            <label for="psw_reg"><b>Пароль</b></label>
+            <input type="password" placeholder=" Ведите пароль" name="psw" id="psw_reg" required>
+
+            <label for="psw2"><b>Повторите пароль</b></label>
+            <input type="password" placeholder=" Повторите пароль" name="psw2" id="psw2" required>
+
+            <div class="clearfix">
+                <button onclick="userRegister();" type="submit" class="signupbtn">Зарегистрироваться</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    document.getElementById("id01").style.display = 'block';
+</script>
+<script src="/js/signin_user.js" type="application/javascript"></script>
+<script src="/js/signup_user.js" type="application/javascript"></script>
+</body>
+</html>
