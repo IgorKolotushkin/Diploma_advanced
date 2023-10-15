@@ -14,12 +14,6 @@ services:
       - 'media:/src/media'
     networks:
       - backend
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "50m"
-        max-file: "5"
-        tag: "{{.ImageName}}|{{.Name}}"
 
   nginx:
       build:
@@ -118,8 +112,8 @@ networks:
 volumes:
   media:
     driver: local
-  app_storage: {}
   grafana_storage: {}
   postgres_storage: {}
   promtail_data: {}
   loki_data: {}
+
