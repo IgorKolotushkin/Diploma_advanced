@@ -94,7 +94,7 @@ services:
     volumes:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - promtail_data:/var/lib/promtail/positions
-      - ${PWD}/promtail/promtail.yml:/etc/promtail/promtail.yml
+      - ./promtail/promtail.yml:/etc/promtail/promtail.yml
     command:
       - '-config.file=/etc/promtail/promtail.yml'
     networks:
@@ -107,7 +107,7 @@ services:
     ports:
       - "3100:3100"
     volumes:
-      - ${PWD}/loki/loki-config.yml:/etc/loki-config.yml
+      - ./loki/loki-config.yml:/etc/loki-config.yml
       - loki_data:/tmp/loki/
     networks:
       - backend
